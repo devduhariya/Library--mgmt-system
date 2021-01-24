@@ -7,9 +7,11 @@ class Layout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            isAdmin: false
         };
         this.checkLogin = this.checkLogin.bind(this);
+        // this.cheakAdmin = this.cheakAdmin.bind(this);
     }
     checkLogin() {
         console.log('in chk login');
@@ -17,18 +19,20 @@ class Layout extends Component {
             console.log('res: session', res);
             if (res.data.session && res.data.session.userEmail) {
                 this.setState({
-                    isLoggedIn: true
-                });
-            }else{
-                this.setState({
-                    isLoggedIn: false
+                    isLoggedIn: true,
+                    isAdmin: false
                 });
             }
-
+            if (res.data.session.role === 'admin') {
+                this.setState({
+                    isAdmin: true
+                });
+            }
         }).catch(error => {
             console.log('Error: ', error);
             this.setState({
-                isLoggedIn: false
+                isLoggedIn: false,
+                isAdmin: false
             });
         });
     }
@@ -39,7 +43,7 @@ class Layout extends Component {
 
         return (
             <div>
-                <Header isLoggedIn={this.state.isLoggedIn} />
+                <Header isLoggedIn={this.state.isLoggedIn} isAdmin={this.state.isAdmin}/>
                 {this.props.children}
                 <Footer />
             </div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 class Header extends Component {
     constructor(props) {
         super(props);
-        console.log('header: ', props.isLoggedIn);
+        console.log('header: ', props.isLoggedIn, ' isAdmin: ', props.isAdmin);
 
         this.logout = this.logout.bind(this);
     }
@@ -21,7 +21,7 @@ class Header extends Component {
         return (
             <div >
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-                    <div className="container" >
+                    <div className="container-fluid" >
                         <img className="shadow-sm bg-white rounded"
                             src="https://images.cdn3.stockunlimited.net/preview1300/e-library-on-laptop_1819141.jpg"
                             alt="Turning Pages"
@@ -31,20 +31,29 @@ class Header extends Component {
                         </a>
                         <div className="collapse navbar-collapse"
                             id="navbarsExample07" >
-                            <ul className="navbar-nav navbar-right ml-auto" >
-                                <li className="nav-item nav-link" onClick={() => { window.location.pathname = '/Admin' }}> Admin</li>
+                            <ul className="navbar-nav ml-auto" >
+                                {
+                                    this.props.isAdmin ? (
+                                        <li className="nav-item nav-link" onClick={() => { window.location.pathname = '/Admin' }}> Admin</li>
+                                    ) : ''
+                                }
+
                                 <li className="nav-item nav-link" onClick={() => { window.location.pathname = '/' }}>Home</li>
-                            </ul>
-                            {
-                                this.props.isLoggedIn ? (
-                                    <ul className="navbar-nav ml-3" >
-                                        <li className="nav-item active" >
+
+                                {
+                                    this.props.isLoggedIn ? (
+
+                                        <li className="nav-item ml-3" >
                                             <button className="nav-link btn-danger btn"
                                                 onClick={this.logout} > Logout </button>
                                         </li>
-                                    </ul>
-                                ) : ''
-                            }
+
+                                    ) : <li className="nav-item ml-3" >
+                                            <button className="nav-link btn-primary btn"
+                                                onClick={() => { window.location.pathname = '/login' }} >Log in </button>
+                                        </li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </nav>
