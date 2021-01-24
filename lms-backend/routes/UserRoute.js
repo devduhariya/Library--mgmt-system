@@ -85,7 +85,7 @@ module.exports = (app) => {
         res.status(200).send({ session: req.session });
         console.log('user-session', req.session);
     })
-    app.get('/user-list', AdminAuthMiddleware, AuthMiddleware, async(req, res) => {
+    app.get('/user-list', AdminAuthMiddleware, async(req, res) => {
         let users = await User.find();
         // console.log('user session',req.session);
         return res.status(200).send(users);

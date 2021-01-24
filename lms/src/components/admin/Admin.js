@@ -29,6 +29,10 @@ class Admin extends Component {
                                     <div className="col"><hr/></div>
                                 </div>
                                 <Link to={'/admin/books'} className="col-md-8 btn btn-info btn-lg ml-2">Add Or update Books</Link>
+                                <div className="row">
+                                    <div className="col"><hr/></div>
+                                </div>
+                                <Link to={'/Admin/users-list'} className="col-md-8 btn btn-info btn-lg ml-2">Manage Users</Link>
                             </div>
                         </div>
                     </div>
