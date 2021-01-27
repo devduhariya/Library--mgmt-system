@@ -4,6 +4,9 @@ const Table = (props) => {
     console.log('props: ', props);
     const { data } = props;
     console.log('data: ', data);
+    // function refresh(){ 
+    //     window.location.reload(); 
+    // }
     return (
         <table className="table table-striped table-bordered">
             <thead>

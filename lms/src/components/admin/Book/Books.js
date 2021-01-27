@@ -208,7 +208,6 @@ class AdminBooks extends Component {
                         <input type="text" value={this.state.author} onChange={this.updateAuthor} className="form-control" placeholder=" Add Author" />
                     </div>
                 </div>
-
                 <div className="row my-2">
                     <div className="col">
                         <textarea type="text" value={this.state.bookDes} onChange={this.updateBookDes} className="form-control" placeholder="Add Book Description" />

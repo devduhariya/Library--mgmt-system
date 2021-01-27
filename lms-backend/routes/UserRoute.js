@@ -27,6 +27,12 @@ module.exports = (app) => {
 
     app.post("/signup", async(req, res) => {
         const { firstName, lastName, email, password, role } = req.body;
+        
+        if(isNullOrUndefined(firstName) || isNullOrUndefined(lastName) || isNullOrUndefined(email) || isNullOrUndefined(password)){
+            res.status(400).send({
+                err: `please input valid details`,
+              });
+        }else{
         const existingUser = await User.findOne({ email });
         if (isNullOrUndefined(existingUser)) {
             // we should allow signup
@@ -34,13 +40,14 @@ module.exports = (app) => {
             const newUser = new User({ firstName, lastName, email, role, password: hashedPwd });
             newUser.role = 'User';
             await newUser.save();
-            // req.session.userId = newUser.email;
+            req.session.userId = newUser.email;
             res.status(201).send({ success: "Signed up" });
         } else {
             res.status(400).send({
                 err: `email ${email} already exists. Please choose another.`,
             });
         }
+    }
     });
     app.post("/login", async(req, res) => {
         const { email, password } = req.body;
@@ -72,7 +79,7 @@ module.exports = (app) => {
     });
     app.get("/logout", (req, res) => {
         if (!isNullOrUndefined(req.session)) {
-            // console.log("logout hhhh: ", req.session);
+
             req.session.destroy(() => {
                 res.status(200).send('logged out');
             });
@@ -83,7 +90,6 @@ module.exports = (app) => {
 
     app.get('/session', AuthMiddleware, (req, res) => {
         res.status(200).send({ session: req.session });
-        console.log('user-session', req.session);
     })
     app.get('/user-list', AdminAuthMiddleware, async(req, res) => {
         let users = await User.find();

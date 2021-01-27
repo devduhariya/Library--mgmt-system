@@ -30,16 +30,6 @@ input[type=email]{
     border: none;
     background: #f1f1f1;
 }
-
-body {
-    /* background-image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoczQfaIFplaaDmByT3AFnpxJfsXusnYWZqw&usqp=CAU";
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlKAPDqdy18cjzX-shnldz7d3BCIntrvErhQ&usqp=CAU");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative; */
-}
 .card-text{
     max-height: 180px;
     overflow-y: auto;
